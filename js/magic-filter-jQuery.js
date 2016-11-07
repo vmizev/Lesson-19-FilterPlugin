@@ -27,8 +27,6 @@
 		return this._categoryArray;
 	}
 
-
-
 	MagicFilter.prototype.unicArrayFilter = function(value, index, arr){
 		return arr.indexOf(value) === index;
 	}
@@ -56,8 +54,7 @@
 		}	
 	}
 
-	MagicFilter.prototype.action = function(self){	
-				
+	MagicFilter.prototype.action = function(self){					
 		$(this.element).on('click', function () {
 			var categoryObj = self.getCategoryObject();
 			var target = $(this).attr('data-target');
@@ -66,9 +63,8 @@
 			$(checkbox).each(function(){
 				categoryObj[target].push(this.value);
 			});
-			$(target).text(categoryObj[target].join()); // Запись строки с value в правый блок	
+			$(target).text(categoryObj[target].join()); 	
 			self.updateCategoryAll();
-			//console.log(categoryObj[category[i]]);
 			self.sendAjax(categoryObj);	
 		})
 
@@ -79,7 +75,6 @@
 			$(target).text(categoryObj[target].join());
 			$('[data-target='+target+']'+':checked').prop('checked', false);
 			self.updateCategoryAll();
-
 		})
 
 		$('.reset-all').on('click', function(){
@@ -92,17 +87,13 @@
 				$('[data-target='+target+']'+':checked').prop('checked', false);
 			}
 			self.updateCategoryAll();
-
 			$('.content-load').empty();				
 		})
 	}
 
-
-
 	MagicFilter.prototype.sendAjax = function(obj) {
 		$('.loader').fadeIn('slow');
 		setTimeout(function(){
-			//$('.content-load').load('item.html');
 			 $.ajax({
 			 	type: 'get',
 			 	url: 'item.html',
@@ -114,9 +105,6 @@
 			 })
 		}, 1000);
 	}
-
-
-
 
 	$.fn.magicFilter = function(options){
 		new MagicFilter(options, this);
